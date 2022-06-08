@@ -154,10 +154,10 @@ function CustomInput(props) {
               alignItems: 'center',
               justifyContent: 'space-between',
               borderColor:
-                error && error.length > 1 ? COLORS.error : COLORS.secondary,
+                error && error.length > 1 ? COLORS.error : COLORS.lightWhite,
               borderWidth: 1,
               borderStyle: 'solid',
-              backgroundColor: COLORS.secondary,
+              backgroundColor: COLORS.smokeWhite,
               paddingHorizontal: SPACING.xxxsmall,
               borderRadius: BORDERRADIUS.small,
               ...style,
@@ -171,7 +171,7 @@ function CustomInput(props) {
                   width: '100%',
                   lineHeight: Platform.OS === 'android' ? 20 : 0,
                   fontFamily: 'Montserrat-Medium',
-                  color: COLORS.white,
+                  color: COLORS.descText,
                 },
               ]}
               placeholder={placeholder}
