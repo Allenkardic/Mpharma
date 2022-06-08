@@ -31,6 +31,7 @@ export const COLORS = {
   //color variations
   darkGray: '#5E5F62',
   midGrey: '#6A6969',
+  lightGrey: '#767486',
   smokeWhite: '#f5f5f5',
   lightWhite: '#fafafa',
 };

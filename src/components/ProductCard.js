@@ -48,10 +48,9 @@ function ProductCard({onPressDelete, onPressEdit, title, oldPrice, newPrice}) {
           </CustomText>
           <CustomText
             semibold
-            color={COLORS.error}
+            color={COLORS.lightGrey}
             large
             style={{
-              //   marginBottom: SPACING.xxxsmall,
               textDecorationLine: 'line-through',
               textDecorationStyle: 'solid',
             }}

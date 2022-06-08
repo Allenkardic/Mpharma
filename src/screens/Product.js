@@ -17,7 +17,7 @@ import CustomButton from '../components/CustomButton';
 function Product(props) {
   const dispatch = useDispatch();
   const refRBSheet = React.useRef();
-  // satte
+  // state
   const [productData, setProductData] = React.useState([]);
 
   // REDUX STATE
@@ -31,7 +31,7 @@ function Product(props) {
 
   React.useEffect(() => {
     async function getProductFunc() {
-      await dispatch(getProductsRequest());
+      dispatch(getProductsRequest());
     }
     getProductFunc();
   }, []);
@@ -48,16 +48,11 @@ function Product(props) {
     }
   }, []);
 
-  // console.log(getProductsState, 'sattes');
-
-  // const renderItem = ({item}) => (
-  //   console.log(item)
-  //   <ProductCard
-  //     title={item?.name}
-  //     newPrice={item?.prices[0]?.price}
-  //     oldPrice={item?.prices[0]?.price}
-  //   />
-  // );
+  const resetInputs = () => {
+    setTitleInput('');
+    setNewAmountInput('');
+    setOldAmountInput('');
+  };
 
   const openBottomSheet = () => {
     refRBSheet.current.open();
@@ -67,8 +62,13 @@ function Product(props) {
     refRBSheet.current.close();
   };
 
-  const handleAddNewProduct = () => {
+  const plusBtnPressed = () => {
     setEditBtnPressed(false);
+    resetInputs();
+    openBottomSheet();
+  };
+
+  const handleAddNewProduct = () => {
     const newProduct = {
       id: uuid.v4(),
       name: titleInput,
@@ -89,6 +89,7 @@ function Product(props) {
     const payload = [...productData, newProduct];
     setProductData(payload);
     closeBottomSheet();
+    resetInputs();
   };
 
   const handleDeleteProduct = id => {
@@ -99,48 +100,31 @@ function Product(props) {
   };
 
   const handleOnPressEdit = item => {
-    console.log(item, 'all items');
     setEditBtnPressed(true);
+    setTitleInput(item.name);
+    setNewAmountInput(item.prices[0].price.toString());
+    setOldAmountInput(item.prices[1].price.toString());
+
     setItemToEdit(item);
     openBottomSheet();
   };
 
   const handleConfirmEdit = () => {
-    //   const updatedProduct = productData.map(obj =>
-    //     obj.id === itemToEdit.id  ? { ...obj, name: titleInput, prices[0].name: } : obj
-    // );
-
-    // let updatedProduct = productData.find(el => {
-    //   return el.id === itemToEdit.id;
-    // });
-
-    // updatedProduct.name = titleInput;
-    // updatedProduct.prices[0].price = parseFloat(newAmountInput);
-    // updatedProduct.prices[0].price = parseFloat(oldAmountInput);
-
     const updatedProduct = [...productData].map(el => {
       if (el.id === itemToEdit.id) {
         el.name = titleInput;
         el.prices[0].price = parseFloat(newAmountInput);
-        el.prices[0].price = parseFloat(oldAmountInput);
+        el.prices[1].price = parseFloat(oldAmountInput);
       }
       return el;
     });
 
     setProductData(updatedProduct);
     closeBottomSheet();
-
-    // console.log(JSON.stringify(updatedProduct), 'pprr');
-
-    // console.log(updatedProduct, 'll');
-    // setProductData(updatedProduct);
+    resetInputs();
   };
 
-  // console.log(editBtnPressed, 'show');
-  // console.log(itemToEdit?.prices[1]?.price.toString(), '22');
-
   const renderItem = ({item}) => {
-    // console.log(item, 'idd');
     const {id} = item;
     return (
       <ProductCard
@@ -152,32 +136,22 @@ function Product(props) {
       />
     );
   };
+
+  console.log(editBtnPressed, 'kk');
   return (
     <View style={{backgroundColor: COLORS.primary, flex: 1}}>
-      <CustomText medium bold>
+      <CustomText white medium bold>
         hello
       </CustomText>
-
-      {/* <CustomInput
-        onChangeText={text => setMyInput(text)}
-        value={myInput}
-        placeholder="eg: john@doe.com"
-        editable={true}
-        label="Email"
-        keyboardType={'email-address'}
-      /> */}
-
-      {/* <ProductCard title={'Name of content'} oldPrice={200} newPrice={300} />
-      <ProductCard title={'Name of content'} oldPrice={200} newPrice={300} />
-      <ProductCard title={'Name of content'} oldPrice={200} newPrice={300} /> */}
-
-      <FlatList
-        data={productData}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-      />
+      <View style={{paddingHorizontal: SPACING.xsmall}}>
+        <FlatList
+          data={productData}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+        />
+      </View>
       <TouchableOpacity
-        onPress={openBottomSheet}
+        onPress={plusBtnPressed}
         style={{
           ...BOXWITHBIGSHADOW,
           position: 'absolute',
@@ -199,7 +173,7 @@ function Product(props) {
         closeOnPressMask={true}
         closeOnDragDown={true}
         refRBSheet={refRBSheet}
-        title={'Add new product'}
+        title={editBtnPressed ? 'Update this product' : 'Add new product'}
         height={HP('50%')}>
         <View style={{paddingHorizontal: SPACING.xsmall}}>
           <CustomInput
@@ -208,10 +182,7 @@ function Product(props) {
             placeholder="eg: bag"
             editable={true}
             label="Product name"
-            keyboardType={'email-address'}
-            defaultValue={
-              editBtnPressed ? itemToEdit?.prices[0]?.price.toString() : ''
-            }
+            keyboardType={'default'}
           />
 
           <CustomInput
@@ -221,9 +192,6 @@ function Product(props) {
             editable={true}
             label="New Price"
             keyboardType={'numeric'}
-            defaultValue={
-              editBtnPressed ? itemToEdit?.prices[1]?.price.toString() : ''
-            }
           />
 
           <CustomInput
@@ -233,7 +201,6 @@ function Product(props) {
             editable={true}
             label="Old Price"
             keyboardType={'numeric'}
-            defaultValue={editBtnPressed ? itemToEdit?.name : ''}
           />
         </View>
         <View
@@ -242,7 +209,7 @@ function Product(props) {
             marginTop: SPACING.xsmall,
           }}>
           <CustomButton
-            title={'Add product'}
+            title={editBtnPressed ? 'Update product' : 'Add product'}
             onPress={editBtnPressed ? handleConfirmEdit : handleAddNewProduct}
           />
         </View>
