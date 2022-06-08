@@ -43,7 +43,7 @@ function ProductCard({onPressDelete, onPressEdit, title, oldPrice, newPrice}) {
             width: '30%',
             alignSelf: 'flex-end',
           }}>
-          <CustomText semibold white xxlarge>
+          <CustomText semibold white xxlarge right>
             {currencyFormat(newPrice)}
           </CustomText>
           <CustomText
