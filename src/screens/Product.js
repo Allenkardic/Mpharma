@@ -57,17 +57,6 @@ function Product(props) {
   //   />
   // );
 
-  const renderItem = ({item}) => {
-    // console.log(item, 'idd');
-    return (
-      <ProductCard
-        title={item?.name}
-        newPrice={item?.prices[0]?.price}
-        oldPrice={item?.prices[1]?.price}
-      />
-    );
-  };
-
   const openBottomSheet = () => {
     refRBSheet.current.open();
   };
@@ -98,6 +87,26 @@ function Product(props) {
     const payload = [...productData, newProduct];
     setProductData(payload);
     closeBottomSheet();
+  };
+
+  const handleDeleteProduct = id => {
+    // this funtion deleted an item and returns items that are remaining
+    // deleting is via identical ids
+    const updateProduct = productData.filter(el => el.id !== id);
+    setProductData(updateProduct);
+  };
+
+  const renderItem = ({item}) => {
+    // console.log(item, 'idd');
+    const {id} = item;
+    return (
+      <ProductCard
+        onPressDelete={() => handleDeleteProduct(id)}
+        title={item?.name}
+        newPrice={item?.prices[0]?.price}
+        oldPrice={item?.prices[1]?.price}
+      />
+    );
   };
   return (
     <View style={{backgroundColor: COLORS.primary, flex: 1}}>
