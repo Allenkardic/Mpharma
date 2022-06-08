@@ -39,7 +39,7 @@ function BottomSheet({
           draggableIcon: {
             opacity: 1,
             width: '10%',
-            backgroundColor: COLORS.lightGrey,
+            backgroundColor: COLORS.midGrey,
             zIndex: 3,
           },
         }}
@@ -49,9 +49,9 @@ function BottomSheet({
             <Icon
               onPress={() => refRBSheet.current.close()}
               name={'x'}
-              color={COLORS.greyText}
+              color={COLORS.midGrey}
               size={HP('2.5%')}
-              style={{alignSelf: 'flex-end', marginRight: SPACING.xxsmall}}
+              style={{alignSelf: 'flex-start', marginLeft: SPACING.xsmall}}
             />
           )}
         </View>

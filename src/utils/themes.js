@@ -20,7 +20,9 @@ export const COLORS = {
   tertiary: '#72bbe2',
   success: '#219653',
   error: '#fe3b30',
+  yellow: '#fff9da',
   descText: '#121515',
+  blue: '#032e90',
 
   //neutral
   black: '#060606',
