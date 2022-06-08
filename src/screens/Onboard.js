@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StatusBar} from 'react-native';
+import {View, StatusBar, StyleSheet} from 'react-native';
 
 import {showMessage} from 'react-native-flash-message';
 
@@ -23,11 +23,7 @@ function Onboarding(props) {
   return (
     <View
       style={{
-        flex: 1,
-        justifyContent: 'center',
-        backgroundColor: COLORS.primary,
-        paddingTop: Platform.OS == 'ios' ? SPACING.small : SPACING.xxsmall,
-        paddingHorizontal: SPACING.xsmall,
+        ...styles.container,
       }}>
       <StatusBar
         animated={true}
@@ -59,5 +55,15 @@ function Onboarding(props) {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: COLORS.primary,
+    paddingTop: Platform.OS == 'ios' ? SPACING.small : SPACING.xxsmall,
+    paddingHorizontal: SPACING.xsmall,
+  },
+});
 
 export default Onboarding;
