@@ -26,6 +26,8 @@ function Product(props) {
   const [titleInput, setTitleInput] = React.useState('');
   const [oldAmountInput, setOldAmountInput] = React.useState('');
   const [newAmountInput, setNewAmountInput] = React.useState('');
+  const [editBtnPressed, setEditBtnPressed] = React.useState(false);
+  const [itemToEdit, setItemToEdit] = React.useState({});
 
   React.useEffect(() => {
     async function getProductFunc() {
@@ -66,7 +68,7 @@ function Product(props) {
   };
 
   const handleAddNewProduct = () => {
-    // const newProduct = [...productData, {id:productData.length+1, }]
+    setEditBtnPressed(false);
     const newProduct = {
       id: uuid.v4(),
       name: titleInput,
@@ -96,12 +98,54 @@ function Product(props) {
     setProductData(updateProduct);
   };
 
+  const handleOnPressEdit = item => {
+    console.log(item, 'all items');
+    setEditBtnPressed(true);
+    setItemToEdit(item);
+    openBottomSheet();
+  };
+
+  const handleConfirmEdit = () => {
+    //   const updatedProduct = productData.map(obj =>
+    //     obj.id === itemToEdit.id  ? { ...obj, name: titleInput, prices[0].name: } : obj
+    // );
+
+    // let updatedProduct = productData.find(el => {
+    //   return el.id === itemToEdit.id;
+    // });
+
+    // updatedProduct.name = titleInput;
+    // updatedProduct.prices[0].price = parseFloat(newAmountInput);
+    // updatedProduct.prices[0].price = parseFloat(oldAmountInput);
+
+    const updatedProduct = [...productData].map(el => {
+      if (el.id === itemToEdit.id) {
+        el.name = titleInput;
+        el.prices[0].price = parseFloat(newAmountInput);
+        el.prices[0].price = parseFloat(oldAmountInput);
+      }
+      return el;
+    });
+
+    setProductData(updatedProduct);
+    closeBottomSheet();
+
+    // console.log(JSON.stringify(updatedProduct), 'pprr');
+
+    // console.log(updatedProduct, 'll');
+    // setProductData(updatedProduct);
+  };
+
+  // console.log(editBtnPressed, 'show');
+  // console.log(itemToEdit?.prices[1]?.price.toString(), '22');
+
   const renderItem = ({item}) => {
     // console.log(item, 'idd');
     const {id} = item;
     return (
       <ProductCard
         onPressDelete={() => handleDeleteProduct(id)}
+        onPressEdit={() => handleOnPressEdit(item)}
         title={item?.name}
         newPrice={item?.prices[0]?.price}
         oldPrice={item?.prices[1]?.price}
@@ -165,6 +209,9 @@ function Product(props) {
             editable={true}
             label="Product name"
             keyboardType={'email-address'}
+            defaultValue={
+              editBtnPressed ? itemToEdit?.prices[0]?.price.toString() : ''
+            }
           />
 
           <CustomInput
@@ -174,6 +221,9 @@ function Product(props) {
             editable={true}
             label="New Price"
             keyboardType={'numeric'}
+            defaultValue={
+              editBtnPressed ? itemToEdit?.prices[1]?.price.toString() : ''
+            }
           />
 
           <CustomInput
@@ -183,6 +233,7 @@ function Product(props) {
             editable={true}
             label="Old Price"
             keyboardType={'numeric'}
+            defaultValue={editBtnPressed ? itemToEdit?.name : ''}
           />
         </View>
         <View
@@ -190,7 +241,10 @@ function Product(props) {
             paddingHorizontal: SPACING.xsmall,
             marginTop: SPACING.xsmall,
           }}>
-          <CustomButton title={'Add product'} onPress={handleAddNewProduct} />
+          <CustomButton
+            title={'Add product'}
+            onPress={editBtnPressed ? handleConfirmEdit : handleAddNewProduct}
+          />
         </View>
       </BottomSheet>
     </View>
