@@ -1,7 +1,14 @@
 import React from 'react';
-import {View, FlatList, TouchableOpacity} from 'react-native';
+import {
+  View,
+  FlatList,
+  TouchableOpacity,
+  Platform,
+  StatusBar,
+} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import uuid from 'react-native-uuid';
+import {showMessage} from 'react-native-flash-message';
 import {
   getProductsRequest,
   getProductsCleanUp,
@@ -15,6 +22,7 @@ import {BOXWITHBIGSHADOW, COLORS, HP, SPACING, WP} from '../utils/themes';
 import BottomSheet from '../components/BottomSheet';
 import CustomButton from '../components/CustomButton';
 function Product(props) {
+  const {username} = props.route.params;
   const dispatch = useDispatch();
   const refRBSheet = React.useRef();
   // state
@@ -90,6 +98,10 @@ function Product(props) {
     setProductData(payload);
     closeBottomSheet();
     resetInputs();
+    showMessage({
+      type: 'success',
+      message: 'New product added',
+    });
   };
 
   const handleDeleteProduct = id => {
@@ -104,7 +116,6 @@ function Product(props) {
     setTitleInput(item.name);
     setNewAmountInput(item.prices[0].price.toString());
     setOldAmountInput(item.prices[1].price.toString());
-
     setItemToEdit(item);
     openBottomSheet();
   };
@@ -137,13 +148,47 @@ function Product(props) {
     );
   };
 
-  console.log(editBtnPressed, 'kk');
   return (
-    <View style={{backgroundColor: COLORS.primary, flex: 1}}>
-      <CustomText white medium bold>
-        hello
+    <View
+      style={{
+        backgroundColor: COLORS.primary,
+        flex: 1,
+        paddingTop: Platform.OS == 'ios' ? SPACING.small : SPACING.xxsmall,
+      }}>
+      <StatusBar
+        animated={true}
+        backgroundColor={COLORS.primary}
+        barStyle="light-content"
+      />
+      <Icon
+        onPress={() => props.navigation.goBack()}
+        name={'arrow-left'}
+        size={HP('4%')}
+        color={COLORS.lightWhite}
+        style={{marginLeft: SPACING.xxsmall}}
+      />
+
+      <CustomText
+        style={{
+          marginLeft: SPACING.xsmall,
+          marginTop: SPACING.xxsmall,
+          marginBottom: SPACING.xsmall,
+        }}
+        white
+        medium
+        bold>
+        Hi {username},
       </CustomText>
       <View style={{paddingHorizontal: SPACING.xsmall}}>
+        <CustomText
+          style={{
+            marginBottom: SPACING.xsmall,
+          }}
+          color={COLORS.smokeWhite}
+          small
+          center>
+          Products list
+        </CustomText>
         <FlatList
           data={productData}
           renderItem={renderItem}
