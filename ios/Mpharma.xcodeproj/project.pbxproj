@@ -14,6 +14,11 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7699B88040F8A987B510C191 /* libPods-Mpharma-MpharmaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-Mpharma-MpharmaTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		E3E86BC289AF48909C7E1DCE /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5F570F49C34F4A9CB7153D73 /* Montserrat-Bold.ttf */; };
+		7A215A9FA7A34B378D701D64 /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3DD5ADBFC09E4B959B1C088D /* Montserrat-Light.ttf */; };
+		5CE5A9EAC9D641C598933448 /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CFE7A66713594830AEA01898 /* Montserrat-Medium.ttf */; };
+		F908C2A1A2254C51B213D03E /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E03AAD063C95436BA4E52AD2 /* Montserrat-Regular.ttf */; };
+		DB653819920641C38A86311D /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 590700F2BEA843D389B9740D /* Montserrat-SemiBold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +65,11 @@
 		CE18C1321E7140BBB1190A5D /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		E67271EFF8A049A6B93CA86C /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		5F570F49C34F4A9CB7153D73 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; name = "Montserrat-Bold.ttf"; path = "../assets/fonts/Montserrat-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3DD5ADBFC09E4B959B1C088D /* Montserrat-Light.ttf */ = {isa = PBXFileReference; name = "Montserrat-Light.ttf"; path = "../assets/fonts/Montserrat-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CFE7A66713594830AEA01898 /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; name = "Montserrat-Medium.ttf"; path = "../assets/fonts/Montserrat-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E03AAD063C95436BA4E52AD2 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; name = "Montserrat-Regular.ttf"; path = "../assets/fonts/Montserrat-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		590700F2BEA843D389B9740D /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; name = "Montserrat-SemiBold.ttf"; path = "../assets/fonts/Montserrat-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +141,11 @@
 				8EF5454954F240B78C6EC94F /* Octicons.ttf */,
 				E67271EFF8A049A6B93CA86C /* SimpleLineIcons.ttf */,
 				4106A03FA21945A9A0094EA3 /* Zocial.ttf */,
+				5F570F49C34F4A9CB7153D73 /* Montserrat-Bold.ttf */,
+				3DD5ADBFC09E4B959B1C088D /* Montserrat-Light.ttf */,
+				CFE7A66713594830AEA01898 /* Montserrat-Medium.ttf */,
+				E03AAD063C95436BA4E52AD2 /* Montserrat-Regular.ttf */,
+				590700F2BEA843D389B9740D /* Montserrat-SemiBold.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -284,6 +299,11 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				E3E86BC289AF48909C7E1DCE /* Montserrat-Bold.ttf in Resources */,
+				7A215A9FA7A34B378D701D64 /* Montserrat-Light.ttf in Resources */,
+				5CE5A9EAC9D641C598933448 /* Montserrat-Medium.ttf in Resources */,
+				F908C2A1A2254C51B213D03E /* Montserrat-Regular.ttf in Resources */,
+				DB653819920641C38A86311D /* Montserrat-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,6 +559,7 @@
 				PRODUCT_NAME = Mpharma;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -563,6 +584,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Mpharma;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

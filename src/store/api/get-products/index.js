@@ -34,9 +34,11 @@ export const getProductsRequest = () => {
 
       dispatch(getProductsSuccess(data));
     } catch (e) {
+      console.log(e, 'erros');
       if (e.response) {
         // Request made and server responded
         dispatch(getProductsFail(e.response.data));
+        console.log(e.response, 'erros');
       } else {
         dispatch(getProductsFail(e));
       }

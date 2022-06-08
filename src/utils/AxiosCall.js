@@ -1,18 +1,11 @@
-import {Alert} from 'react-native';
 import axios from 'axios';
 
-// export const baseURL = 'https://demo.octo5.co/';
-export const baseURL = 'http://www.mocky.io/v2';
-
-import FlashMessage, {showMessage} from 'react-native-flash-message';
+export const baseURL = 'https://www.mocky.io/v2';
 
 const AxiosCall = async (callObj, dispatch) => {
   const {path, method, data, contentType} = callObj;
 
   const appheaders = {
-    // Authorization: `Basic ${token}`,
-    // Authorization: `token ${token}`,
-    // 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
     'Content-Type': 'application/json',
     Accept: '*/*',
     'Accept-Encoding': 'gzip, deflate, br',

@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  View,
-  FlatList,
-  TouchableOpacity,
-  Platform,
-  StatusBar,
-} from 'react-native';
+import {View, FlatList, StyleSheet, Platform, StatusBar} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import uuid from 'react-native-uuid';
 import {showMessage} from 'react-native-flash-message';
@@ -17,6 +11,7 @@ import {
 import CustomText from '../components/CustomText';
 import CustomInput from '../components/CustomInput';
 import ProductCard from '../components/ProductCard';
+import PlusButton from '../components/PlusButton';
 import Icon from 'react-native-vector-icons/Feather';
 import {BOXWITHBIGSHADOW, COLORS, HP, SPACING, WP} from '../utils/themes';
 import BottomSheet from '../components/BottomSheet';
@@ -48,7 +43,7 @@ function Product(props) {
     if (getProductsState?.error !== null && !getProductsState.isSuccessful) {
       showMessage({
         type: 'danger',
-        message: getProductsState?.error?.message,
+        message: 'error occured',
       });
       dispatch(getProductsCleanUp());
     } else {
@@ -112,6 +107,7 @@ function Product(props) {
   };
 
   const handleOnPressEdit = item => {
+    // this funtion carries out deffient activities when the edit button on each card is pressed
     setEditBtnPressed(true);
     setTitleInput(item.name);
     setNewAmountInput(item.prices[0].price.toString());
@@ -121,6 +117,7 @@ function Product(props) {
   };
 
   const handleConfirmEdit = () => {
+    // update the product to waiting edit
     const updatedProduct = [...productData].map(el => {
       if (el.id === itemToEdit.id) {
         el.name = titleInput;
@@ -151,9 +148,7 @@ function Product(props) {
   return (
     <View
       style={{
-        backgroundColor: COLORS.primary,
-        flex: 1,
-        paddingTop: Platform.OS == 'ios' ? SPACING.small : SPACING.xxsmall,
+        ...styles.container,
       }}>
       <StatusBar
         animated={true}
@@ -170,9 +165,7 @@ function Product(props) {
 
       <CustomText
         style={{
-          marginLeft: SPACING.xsmall,
-          marginTop: SPACING.xxsmall,
-          marginBottom: SPACING.xsmall,
+          ...styles.userText,
         }}
         white
         medium
@@ -195,22 +188,7 @@ function Product(props) {
           keyExtractor={item => item.id}
         />
       </View>
-      <TouchableOpacity
-        onPress={plusBtnPressed}
-        style={{
-          ...BOXWITHBIGSHADOW,
-          position: 'absolute',
-          bottom: HP('6%'),
-          right: WP('7%'),
-          backgroundColor: COLORS.success,
-          width: HP('7%'),
-          height: HP('7%'),
-          borderRadius: HP('7%') / 2,
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
-        <Icon name={'plus'} size={HP('4%')} color={COLORS.white} />
-      </TouchableOpacity>
+      <PlusButton onPress={plusBtnPressed} />
 
       <BottomSheet
         header={true}
@@ -262,5 +240,18 @@ function Product(props) {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: COLORS.primary,
+    flex: 1,
+    paddingTop: Platform.OS == 'ios' ? SPACING.small : SPACING.xxsmall,
+  },
+  userText: {
+    marginLeft: SPACING.xsmall,
+    marginTop: SPACING.xxsmall,
+    marginBottom: SPACING.xsmall,
+  },
+});
 
 export default Product;

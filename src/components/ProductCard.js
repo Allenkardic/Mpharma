@@ -34,13 +34,13 @@ function ProductCard({onPressDelete, onPressEdit, title, oldPrice, newPrice}) {
           justifyContent: 'space-between',
           alignItems: 'center',
         }}>
-        <View style={{width: '70%'}}>
+        <View style={{width: '60%'}}>
           <CustomText white>{title}</CustomText>
         </View>
         <View
           style={{
             flexDirection: 'column',
-            width: '30%',
+            width: '40%',
             alignSelf: 'flex-end',
           }}>
           <CustomText semibold white xxlarge right>
